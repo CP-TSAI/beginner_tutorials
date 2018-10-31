@@ -27,7 +27,7 @@ catkin_make --only-pkg-with-deps beginner_tutorials
 
 ## How to run
 
-- cd <catkin workspace>
+- cd to catkin_workspace
 
 - Use 3 terminals and execute the following commands. 
 
