@@ -1,13 +1,18 @@
+/** @file talker.cpp
+ *  @brief A publisher node that publishes a string message
+ *  @copyright (c) 2018 Chin-Po Tsai
+ *  @author Chin-Po Tsai
+ */
+#include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
-#include <sstream>
+
 
 /**
- * This tutorial demonstrates simple sending of messages over the ROS system.
+ * This publisher demonstrates simple sending of messages over the ROS system.
  */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
@@ -53,8 +58,7 @@ int main(int argc, char **argv)
    * a unique string for each message.
    */
   int count = 0;
-  while (ros::ok())
-  {
+  while (ros::ok()) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
