@@ -7,6 +7,17 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
+#include "beginner_tutorials/change_string.h"
+
+
+extern std::string text = "wakanda forever ";
+
+bool changeString(beginner_tutorials::change_string::Request &req, beginner_tutorials::change_string::Response &resp){
+  resp.out = req.in;
+  text = resp.out;
+  ROS_WARN_STREAM("Changing the output String");
+  return true;
+}
 
 
 /**
@@ -32,6 +43,40 @@ int main(int argc, char **argv) {
    */
   ros::NodeHandle n;
 
+
+
+
+
+
+
+
+  int frequency = 10;
+
+  /* setting the frequency value to the input/default frequency
+   * passed by launch file
+   */
+  if (argc == 2) {
+    frequency = atoi(argv[1]);
+    ROS_DEBUG_STREAM("The input argument is " << frequency);
+  }
+  // Warning if the frequency is less than 0
+  if (frequency < 0) {
+    ROS_ERROR_STREAM("Invalid argument for frequency");
+    frequency = 1;
+    ROS_WARN_STREAM("Frequency changed to 1");
+  }
+  // Showing Fatal message if frequency is 0
+  if (frequency == 0) {
+    ROS_FATAL_STREAM("Frequency is 0 hz");
+  }
+
+  ros::Rate loop_rate(frequency);
+
+
+
+
+
+
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
@@ -51,7 +96,9 @@ int main(int argc, char **argv) {
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
-  ros::Rate loop_rate(10);
+
+  auto server = n.advertiseService("change_string", changeString);
+  
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -65,7 +112,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "wakanda forever " << count;
+    ss << text << " " << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
