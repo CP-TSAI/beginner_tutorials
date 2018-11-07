@@ -84,8 +84,8 @@ $ rosservice call /change_string DESIRED_MESSAGE
 ``` 
 
 
-## Licence
-- Mit Licence
+## License
+- Mit License
 ```
 Copyright <2018> <Chin-Po Tsai>
 

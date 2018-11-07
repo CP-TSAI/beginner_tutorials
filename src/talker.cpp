@@ -10,8 +10,8 @@
 #include "beginner_tutorials/change_string.h"
 
 
+/// the default string for the publisher
 extern std::string text = "wakanda forever ";
-
 
 
 /**
@@ -52,30 +52,23 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
 
-
-
-
-
-
-
+  /// the default publisher frequency
   int frequency = 10;
 
-  /* setting the frequency value to the input/default frequency
-   * passed by launch file
-   */
+  /// setting the frequency value by launch file
   if (argc == 2) {
     frequency = atoi(argv[1]);
     ROS_DEBUG_STREAM("The input argument is " << frequency);
   }
-  // Warning if the frequency is less than 0
+  /// Warning if the frequency is less than 0
   if (frequency < 0) {
-    ROS_ERROR_STREAM("Invalid argument for frequency");
-    frequency = 1;
-    ROS_WARN_STREAM("Frequency changed to 1");
+    ROS_ERROR_STREAM("the frequency is INVALID");
+    frequency = 5;
+    ROS_WARN_STREAM("the frequency is forced to be 5");
   }
-  // Showing Fatal message if frequency is 0
+  /// Showing Fatal message if frequency is 0
   if (frequency == 0) {
-    ROS_FATAL_STREAM("Frequency is 0 hz");
+    ROS_FATAL_STREAM("Frequency is 0");
   }
 
   ros::Rate loop_rate(frequency);
