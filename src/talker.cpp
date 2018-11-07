@@ -1,6 +1,6 @@
 /** @file talker.cpp
  *  @brief A publisher node that publishes a string message
- *  @copyright (c) 2018 Chin-Po Tsai
+ *  @copyright (c) BSD License
  *  @author Chin-Po Tsai
  */
 #include <sstream>
@@ -12,7 +12,15 @@
 
 extern std::string text = "wakanda forever ";
 
-bool changeString(beginner_tutorials::change_string::Request &req, beginner_tutorials::change_string::Response &resp){
+
+
+/**
+*   @brief This function changes the content of the published message
+*   @param req, resp (for request and respond)
+*   @return bool
+*/
+bool changeString(beginner_tutorials::change_string::Request& req,
+                  beginner_tutorials::change_string::Response& resp) {
   resp.out = req.in;
   text = resp.out;
   ROS_WARN_STREAM("Changing the output String");
@@ -98,7 +106,6 @@ int main(int argc, char **argv) {
 
 
   auto server = n.advertiseService("change_string", changeString);
-  
 
   /**
    * A count of how many messages we have sent. This is used to create

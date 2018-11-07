@@ -1,6 +1,6 @@
 /** @file listener.cpp
  *  @brief A subscriber node that subscribes to a topic and print the contents
- *  @copyright (c) 2018 Chin-Po Tsai
+ *  @copyright BSD License
  *  @author Chin-Po Tsai
  */
 

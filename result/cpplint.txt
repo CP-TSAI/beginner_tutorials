@@ -1,3 +1,6 @@
-cptsai@cptsai-P15FR5 ~/catkin_ws/src/ENPM808X/ROS/beginner_tutorials/src (master) $ cpplint talker.cpp listener.cpp 
-Done processing talker.cpp
+cptsai@cptsai-P15FR5 ~/catkin_ws/src/ENPM808X/ROS/beginner_tutorials/src (Week10_HW) $ cpplint listener.cpp talker.cpp 
 Done processing listener.cpp
+talker.cpp:22:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::change_string::Request& req  [runtime/references] [2]
+talker.cpp:23:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::change_string::Response& resp  [runtime/references] [2]
+Done processing talker.cpp
+Total errors found: 2

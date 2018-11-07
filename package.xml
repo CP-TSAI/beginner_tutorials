@@ -5,7 +5,7 @@
   <description>The beginner_tutorials package</description>
 
   <maintainer email="cptsai@umd.edu">cptsai</maintainer>
-  <license>MIT</license>
+  <license>BSD</license>
 
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
