@@ -2,13 +2,15 @@
 
 
 ## Overview
-The repo shows the simple publisher/subscriber examples from ROS wiki.  
-A talker/listener node is demonstrated in the repo to publish and subscribe a custom string message.
+- The repo shows publisher/subscriber examples from ROS wiki.  
+- A talker/listener node is demonstrated to publish and subscribe a custom string message.
+- A service is added to change the published message.
 
 
 ## Dependencies
 - Ubuntu Xenial (16.04)  
 - ROS Kinetic  
+
 
 ## How to build
 - Make sure you have a catkin workspace by this [link](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).  
@@ -17,61 +19,109 @@ A talker/listener node is demonstrated in the repo to publish and subscribe a cu
 cd <catkin workspace>
 source devel/setup.bash
 cd src
-git clone https://github.com/CP-TSAI/beginner_tutorials.git
+git clone -b Week10_HW https://github.com/CP-TSAI/beginner_tutorials.git
 cd ..
 catkin_make --only-pkg-with-deps beginner_tutorials
 ```
 
 
+## Setup ROS Environment with Terminal
+- Before executing any ROS program
+```
+$ roscore
+```
+
+- Everytime when open a new terminal
+```
+$ source ~/catkin_ws/devel/setup.bash
+```
+
 
 
 ## How to run
 
-- cd to catkin_workspace
+Use either **(1) roslaunch** or **(2) rosrun** command.
 
-- Use 3 terminals and execute the following commands. 
+
+(1) **roslaunch**
+
+```
+- $ roscd beginner_tutorials
+
+- $ roslaunch beginner_tutorials all.launch freq:=1
+```
+
+- The default publisher frequency is 10, you can change it by the roslaunch command.  
+
+
+(2) **rosrun**
+
+- cd to catkin_ws
+
+- Use 2 terminals and execute the following commands. 
 
 - terminal1
 
 ```
-source devel/setup.bash
-roscore
+$ rosrun beginner_tutorials talker
 ```
 
 - terminal2
 
 ```
-source devel/setup.bash
-rosrun beginner_tutorials talker
-```
-
-- terminal3
-
-```
-source devel/setup.bash
-rosrun beginner_tutorials listener
+$ rosrun beginner_tutorials listener
 ```
 
 
+## How to use the service call
+
+- Once the publisher and subscriber is running, we can use a **service call** to change the string message. 
+
+- Open a new terminal, then run
+
+```
+$ rosservice call /change_string DESIRED_MESSAGE
+``` 
 
 
+## Example Showcase
+
+- make the frequency of the publisher 5hz.
+
+```
+$ roslaunch beginner_tutorials all.launch freq:=5
+```
+
+- You'll see something like
+```
+[ INFO] [1541551721.920444997]: I heard: [wakanda forever  85]
+[ INFO] [1541551722.119970793]: wakanda forever  86
+[ INFO] [1541551722.120464329]: I heard: [wakanda forever  86]
+[ INFO] [1541551722.319971642]: wakanda forever  87
+[ INFO] [1541551722.320449526]: I heard: [wakanda forever  87]
+[ INFO] [1541551722.519969315]: wakanda forever  88
+[ INFO] [1541551722.520364922]: I heard: [wakanda forever  88]
+```
+
+- If you want to change the published message, then do
+
+```
+$ rosservice call /change_string "wakanda is doomed"
+```	
+
+- The terminal would shows something like ...
+
+```
+[ INFO] [1541551856.720157134]: I heard: [wakanda forever  759]
+[ INFO] [1541551856.919995812]: wakanda forever  760
+[ WARN] [1541551856.920119453]: Changing the output String
+[ INFO] [1541551856.920420078]: I heard: [wakanda forever  760]
+[ INFO] [1541551857.119965528]: wakanda is doomed 761
+[ INFO] [1541551857.120448497]: I heard: [wakanda is doomed 761]
+[ INFO] [1541551857.319967544]: wakanda is doomed 762
+[ INFO] [1541551857.320436805]: I heard: [wakanda is doomed 762]
+```
 
 
 ## Reference
-- http://wiki.ros.org/ROS/Tutorials/NavigatingTheWiki
-
-- http://wiki.ros.org/ROS/Tutorials/NavigatingTheFilesystem 
-
-- http://wiki.ros.org/ROS/Tutorials/CreatingPackage
-
-- http://wiki.ros.org/ROS/Tutorials/BuildingPackages 
-
-- http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes 
-
-- http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics 
-
-- http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29 
-
-- http://wiki.ros.org/ROS/Tutorials/ExaminingPublisherSubscriber
-
-
+- http://wiki.ros.org/ROS/Tutorials
