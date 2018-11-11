@@ -24,18 +24,15 @@
  *  @copyright (c) BSD License
  *  @author Chin-Po Tsai
  */
-#include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-// #include "String.h"
 #include "beginner_tutorials/change_string.h"
 #include <tf/transform_broadcaster.h>
+#include <sstream>
 
 
 
-// String s;
-
-// / the default string for the publisher
+/// the default string for the publisher
 extern std::string text = "wakanda forever ";
 
 
@@ -47,8 +44,6 @@ extern std::string text = "wakanda forever ";
 bool changeString(beginner_tutorials::change_string::Request& req,
                   beginner_tutorials::change_string::Response& resp) {
   resp.out = req.in;
-  
-  // s.text = resp.out;
   text = resp.out;
 
   ROS_WARN_STREAM("Changing the output String");
@@ -81,7 +76,7 @@ int main(int argc, char **argv) {
 
 
 
-  // Creating objects of class TransformBroadcaster and Transform
+  /// Creating objects of TransformBroadcaster and Transform
   tf::TransformBroadcaster br;
   tf::Transform transform;
 
@@ -133,6 +128,7 @@ int main(int argc, char **argv) {
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
 
+  /// the server for service
   auto server = n.advertiseService("change_string", changeString);
 
   /**
@@ -149,21 +145,18 @@ int main(int argc, char **argv) {
 
 
 
-    // setting the origin and rotation for the transform object
-    transform.setOrigin(tf::Vector3(2.0, 3.0, 0.0));
+    /// setting the origin and rotation for the transform object
+    transform.setOrigin(tf::Vector3(1.0, 2.0, 0.0));
     tf::Quaternion q;
-    q.setRPY(0, 0, 6.28);
+    q.setRPY(0, 0, 6.10);
     transform.setRotation(q);
-    // braoadcasting the transform using Transformbroadcaster
+    /// braoadcasting the transform using Transformbroadcaster
     br.sendTransform(tf::StampedTransform(transform,
                     ros::Time::now(), "world", "talk"));
 
 
 
     std::stringstream ss;
-    
-
-    // ss << s.text << " " << count;
     ss << text << " " << count;
 
 
