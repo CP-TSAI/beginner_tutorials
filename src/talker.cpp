@@ -27,9 +27,14 @@
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+// #include <String.h>
 
 #include "beginner_tutorials/change_string.h"
+#include <tf/transform_broadcaster.h>
 
+
+
+// String s;
 
 /// the default string for the publisher
 extern std::string text = "wakanda forever ";
@@ -43,7 +48,10 @@ extern std::string text = "wakanda forever ";
 bool changeString(beginner_tutorials::change_string::Request& req,
                   beginner_tutorials::change_string::Response& resp) {
   resp.out = req.in;
+  
+  // s.text = resp.out;
   text = resp.out;
+
   ROS_WARN_STREAM("Changing the output String");
   return true;
 }
@@ -71,6 +79,13 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
+
+
+
+  // Creating objects of class TransformBroadcaster and Transform
+  tf::TransformBroadcaster br;
+  tf::Transform transform;
+
 
 
   /// the default publisher frequency
@@ -132,8 +147,27 @@ int main(int argc, char **argv) {
      */
     std_msgs::String msg;
 
+
+
+
+    // setting the origin and rotation for the transform object
+    transform.setOrigin(tf::Vector3(2.0, 3.0, 0.0));
+    tf::Quaternion q;
+    q.setRPY(0, 0, 6.28);
+    transform.setRotation(q);
+    // braoadcasting the transform using Transformbroadcaster
+    br.sendTransform(tf::StampedTransform(transform,
+                    ros::Time::now(), "world", "talk"));
+
+
+
     std::stringstream ss;
+    
+
+    // ss << s.text << " " << count;
     ss << text << " " << count;
+    
+
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
