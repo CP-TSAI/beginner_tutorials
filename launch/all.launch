@@ -1,9 +1,8 @@
 <launch>
 
-  <arg
-    name  ="freq"
-    default = "10"
-  />
+  <arg name  ="freq" default = "10"/>
+
+  <arg name = "record" default = "disable" /> 
 
 
   <node pkg="beginner_tutorials" type="listener" name="listener"  output="screen"/>
@@ -14,5 +13,9 @@
   	args = "$(arg freq)"
   />
   
+  <node name = "rosbag" pkg = "rosbag" type = "record"
+    args = "-a -O $(find beginner_tutorials)/result/pub.bag"
+    if = "$(eval record == 'enable')"
+   />
 
 </launch>
