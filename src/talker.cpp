@@ -27,8 +27,7 @@
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-// #include <String.h>
-
+// #include "String.h"
 #include "beginner_tutorials/change_string.h"
 #include <tf/transform_broadcaster.h>
 
@@ -36,7 +35,7 @@
 
 // String s;
 
-/// the default string for the publisher
+// / the default string for the publisher
 extern std::string text = "wakanda forever ";
 
 
@@ -166,7 +165,7 @@ int main(int argc, char **argv) {
 
     // ss << s.text << " " << count;
     ss << text << " " << count;
-    
+
 
     msg.data = ss.str();
 
