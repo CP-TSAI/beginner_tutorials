@@ -128,7 +128,7 @@ $ rostest beginner_tutorials test.launch
 
 ## How to record with rosbag
 
-- We can use the roslaunch flag to enable the rosbag
+- We can use the roslaunch flag to enable the rosbag (do not use "record" flag if you don't want to use rosbag)
 
 ```
 $ roslaunch beginner_tutorials all.launch record:=enable
@@ -148,6 +148,12 @@ $ rosbag play pub.bag
 ```
 
 - Then you can rosrun listener node to see the result
+
+- The content of rosbag can be seen by the command
+
+```
+$ rosbag info pub.bag
+```
 
 
 
