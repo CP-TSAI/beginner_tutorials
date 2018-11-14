@@ -37,7 +37,8 @@
 */
 TEST(TESTSuite, testService) {
   ros::NodeHandle n;
-  auto client = n.serviceClient<beginner_tutorials::change_string>("change_string");
+  auto client =
+      n.serviceClient<beginner_tutorials::change_string>("change_string");
   bool exists(client.waitForExistence(ros::Duration(10)));
   EXPECT_TRUE(exists);
 }

@@ -1,6 +1,13 @@
-cptsai@cptsai-P15FR5 ~/catkin_ws/src/ENPM808X/ROS/beginner_tutorials/src (Week10_HW) $ cpplint listener.cpp talker.cpp 
+cptsai@cptsai-P15FR5 ~/catkin_ws/src/ENPM808X/ROS/beginner_tutorials/src (Week11_HW) $ cpplint listener.cpp talker.cpp
 Done processing listener.cpp
-talker.cpp:22:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::change_string::Request& req  [runtime/references] [2]
-talker.cpp:23:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::change_string::Response& resp  [runtime/references] [2]
+talker.cpp:30:  Found C system header after other header. Should be: talker.h, c system, c++ system, other.  [build/include_order] [4]
+talker.cpp:31:  Found C++ system header after other header. Should be: talker.h, c system, c++ system, other.  [build/include_order] [4]
+talker.cpp:45:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::change_string::Request& req  [runtime/references] [2]
+talker.cpp:46:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::change_string::Response& resp  [runtime/references] [2]
 Done processing talker.cpp
-Total errors found: 2
+Total errors found: 4
+
+
+cptsai@cptsai-P15FR5 ~/catkin_ws/src/ENPM808X/ROS/beginner_tutorials/test (Week11_HW) $ cpplint main.cpp test.cpp 
+Done processing main.cpp
+Done processing test.cpp
