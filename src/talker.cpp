@@ -38,7 +38,8 @@ extern std::string text = "wakanda forever ";
 
 /**
 *   @brief This function changes the content of the published message
-*   @param req, resp (for request and respond)
+*   @param req (for request)
+*   @param resp (for respond)
 *   @return bool
 */
 bool changeString(beginner_tutorials::change_string::Request& req,

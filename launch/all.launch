@@ -16,6 +16,6 @@
   <node name = "rosbag" pkg = "rosbag" type = "record"
     args = "-a -O $(find beginner_tutorials)/result/pub.bag"
     if = "$(eval record == 'enable')"
-   />
+  />
 
 </launch>

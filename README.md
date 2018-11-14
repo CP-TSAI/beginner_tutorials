@@ -5,6 +5,9 @@
 - The repo shows publisher/subscriber examples from ROS wiki.  
 - A talker/listener node is demonstrated to publish and subscribe a custom string message.
 - A service is added to change the published message.
+- A test-file is added to the package.
+- The tf information is broadcasted in the publisher node.
+- A rosbag flag is added in the launch file.
 
 
 ## Dependencies
@@ -16,10 +19,10 @@
 - Make sure you have a catkin workspace by this [link](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).  
 - Open a new terminal, and execute the following command.  
 ```
-cd <catkin workspace>
+cd to <catkin workspace>
 source devel/setup.bash
 cd src
-git clone -b Week10_HW https://github.com/CP-TSAI/beginner_tutorials.git
+git clone -b Week11_HW https://github.com/CP-TSAI/beginner_tutorials.git
 cd ..
 catkin_make --only-pkg-with-deps beginner_tutorials
 ```
@@ -38,7 +41,7 @@ $ source ~/catkin_ws/devel/setup.bash
 
 
 
-## How to run
+## How to run the package
 
 Use either **(1) roslaunch** or **(2) rosrun** command.
 
@@ -80,35 +83,77 @@ $ rosrun beginner_tutorials listener
 - Open a new terminal, then run
 
 ```
-$ rosservice call /change_string DESIRED_MESSAGE
+$ rosservice call /change_string "DESIRED_MESSAGE"
 ``` 
 
 
-## License
-- Mit License
+## How to use tf frames
+
+- When the talker node is running, the /tf is also being broadcasting
+
+- The tf information can be viewed by the following command
+
 ```
-Copyright <2018> <Chin-Po Tsai>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the "Software"), to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
-and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions
-of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
-TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-IN THE SOFTWARE.
+$ rosrun tf tf_echo /world /talk
 ```
 
+- We can produced a PDF file with the command
 
+```
+$ rosrun tf view_frames
+```
+
+- We can view the PDF by the command
+
+```
+$ evince frames.pdf
+```
+
+
+
+## How to run rostest
+
+- Go to the catkin_ws
+
+```
+$ catkin_make run_tests_beginner_tutorials
+```
+
+- After the compilation, execute the command and wait for the result
+
+```
+$ rostest beginner_tutorials test.launch
+```
+
+
+## How to record with rosbag
+
+- We can use the roslaunch flag to enable the rosbag
+
+```
+$ roslaunch beginner_tutorials Week11_HW.launch record:=enable
+```
+
+- The rosbag would be saved in the "result" file
+
+
+## How to play the rosbag
+
+- Once we have the rosbag, it can be used for testing
+
+- cd to the rosbag file
+
+```
+$ rosbag play pub.bag
+```
+
+- Then you can rosrun listener node to see the result
 
 
 
 ## Example Showcase
+
+### Change the publish string
 
 - make the frequency of the publisher 5hz.
 
