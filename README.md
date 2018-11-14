@@ -131,7 +131,7 @@ $ rostest beginner_tutorials test.launch
 - We can use the roslaunch flag to enable the rosbag
 
 ```
-$ roslaunch beginner_tutorials Week11_HW.launch record:=enable
+$ roslaunch beginner_tutorials all.launch record:=enable
 ```
 
 - The rosbag would be saved in the "result" file
